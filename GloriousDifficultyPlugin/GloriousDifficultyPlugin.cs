@@ -23,8 +23,11 @@ namespace GloriousDifficulty
         public static ManualLogSource EDMLogger;
         public static DifficultyDef GloriousDifficultyDef;
         public static DifficultyIndex GloriousDifficultyDiffIndex;
+        public static bool shouldRun = false;
 
         private const int ENEMY_LEVEL_CAP = 125;
+
+        internal static bool IncreaseSpawnCap = true;
 
         public void Awake()
         {
@@ -32,6 +35,21 @@ namespace GloriousDifficulty
             AddDifficulty();
             FillTokens();
             Run.onRunSetRuleBookGlobal += Run_onRunSetRuleBookGlobal;
+
+            Run.onRunStartGlobal += (Run run) =>
+            {
+                shouldRun = false;
+                if (run.selectedDifficulty == GloriousDifficultyDiffIndex)
+                {
+                    shouldRun = true;
+                    if (IncreaseSpawnCap) On.RoR2.CombatDirector.Awake += CombatDirector_Awake;
+                }
+            };
+            Run.onRunDestroyGlobal += (Run run) =>
+            {
+                shouldRun = false;
+                if (IncreaseSpawnCap) On.RoR2.CombatDirector.Awake -= CombatDirector_Awake;
+            };
         }
 
         public void FillTokens()
@@ -51,10 +69,16 @@ namespace GloriousDifficulty
             GloriousDifficultyDef.foundIconSprite = true;
             GloriousDifficultyDiffIndex = DifficultyAPI.AddDifficulty(GloriousDifficultyDef);
         }
-        // TODO: Figure out how to boost spawn rate of enemies
+
         private void Run_onRunSetRuleBookGlobal(Run arg1, RuleBook arg2)
         {
             Run.ambientLevelCap = (arg1.selectedDifficulty == GloriousDifficultyDiffIndex) ? ENEMY_LEVEL_CAP : Run.ambientLevelCap;
+        }
+
+        public static void CombatDirector_Awake(On.RoR2.CombatDirector.orig_Awake orig, CombatDirector self)
+        {
+            if (IncreaseSpawnCap) self.creditMultiplier *= 1.1f;
+            orig(self);
         }
     }
 }
