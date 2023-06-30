@@ -1,9 +1,10 @@
-# R2Boilerplate
+## Glorious Difficulty
+#### A custom difficulty mod that aims to provide more challenge beyond Monsoon. What does this mod add?
+- A new vanilla-like difficulty, slightly more challenging that Monsoon.
+- Player Healing and Health Regeneration: -40%
+- Difficulty scaling: +75%
+- Enemy level cap: increased to 125
+- Enemy spawn rate: +10%
+- This difficulty will count towards Monsoon specific unlocks too!
 
-This repository contains a sample mod for Risk of Rain 2.
-
-You can clone this repository, open the visual studio solution file and compile it immediately.
-
-This repository is meant to represent best practices for starting a simple mod.
-
-Once your mod get compiled, you can utilize the Thunderstore folder for later uploading it to https://thunderstore.io/c/riskofrain2/
+[![](https://media.discordapp.net/attachments/1123128377977610330/1124381685115535432/GloriusDifficultyReadMeImage.png?width=1080&height=816)]()

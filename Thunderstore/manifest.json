@@ -1,12 +1,12 @@
 ﻿{
-	"name": "MyFirstMod",
+	"name": "GloriousDifficulty",
 	"version_number": "1.0.0",
 	"website_url": "",
-	"description": "My first Mod",
+	"description": "A custom difficulty mod that aims to provide more challenge beyond Monsoon",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.2108",
 		"RiskofThunder-HookGenPatcher-1.2.3",
-		"RiskofThunder-R2API_Items-1.0.1",
+		"RiskofThunder-R2API_Difficulty-1.1.2",
 		"RiskofThunder-R2API_Language-1.0.0"
 	]
 }
