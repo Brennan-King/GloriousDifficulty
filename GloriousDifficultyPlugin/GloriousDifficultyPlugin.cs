@@ -28,10 +28,16 @@ namespace GloriousDifficulty
         private const int ENEMY_LEVEL_CAP = 125;
 
         internal static bool IncreaseSpawnCap = true;
+        internal static PluginInfo pluginInfo;
+
+        public AssetBundle GloriousDifficultyAssetbundle;
 
         public void Awake()
         {
+            pluginInfo = Info;
             EDMLogger = Logger;
+            GloriousDifficultyAssetbundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(pluginInfo.Location), "gloriousdifficultyicon"));
+
             AddDifficulty();
             FillTokens();
             Run.onRunSetRuleBookGlobal += Run_onRunSetRuleBookGlobal;
@@ -64,8 +70,8 @@ namespace GloriousDifficulty
 
         public void AddDifficulty()
         {
-            GloriousDifficultyDef = new(3.5f, "GLORIOUS_DIFFICULTY", "EXAMPLEDIFFICULTYMOD_ICON", "GLORIOUS_DIFFICULTY_DESCRIPTION", new Color32(193, 117, 255, 255), "GD", true);
-            GloriousDifficultyDef.iconSprite = null;
+            GloriousDifficultyDef = new(3.5f, "GLORIOUS_DIFFICULTY", "GLORIOUS_DIFFICULTY_ICON", "GLORIOUS_DIFFICULTY_DESCRIPTION", new Color32(193, 117, 255, 255), "GD", true);
+            GloriousDifficultyDef.iconSprite = GloriousDifficultyAssetbundle.LoadAsset<Sprite>("belt_icon.png");
             GloriousDifficultyDef.foundIconSprite = true;
             GloriousDifficultyDiffIndex = DifficultyAPI.AddDifficulty(GloriousDifficultyDef);
         }
